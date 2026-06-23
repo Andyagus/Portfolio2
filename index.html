@@ -98,12 +98,21 @@
         gap: 0;
         max-height: 100%;
         overflow-y: auto;
+        scrollbar-gutter: auto;
+        scrollbar-color: #bdbdbd transparent;
+        scrollbar-width: thin;
       }
 
       .outline-jumps {
         display: grid;
         gap: 3px;
+        position: sticky;
+        top: 0;
+        z-index: 2;
         margin-bottom: 22px;
+        padding: 0 0 18px;
+        background: #fff;
+        border-bottom: 1px solid #dedede;
       }
 
       .outline-jump-link {
@@ -177,6 +186,17 @@
         line-height: 1.25;
       }
 
+      .role-pill {
+        width: max-content;
+        border: 1px solid #dedede;
+        border-radius: 999px;
+        padding: 0 5px 1px;
+        color: #b8b8b8;
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
       .project-list {
         display: grid;
         gap: 2px;
@@ -219,8 +239,19 @@
         line-height: 1.25;
       }
 
+      .text-list .role-pill {
+        color: #b8b8b8;
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
       .text-list span:hover {
         color: #777;
+      }
+
+      .text-list .role-pill:hover {
+        color: #b8b8b8;
       }
 
       .text-entry {
@@ -228,10 +259,49 @@
         gap: 2px;
       }
 
+      .text-entry-heading {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
       .text-entry-title {
         color: #b3b3b3;
         font-weight: 600;
         line-height: 1.25;
+      }
+
+      .text-entry-toggle {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: #b3b3b3;
+        font: inherit;
+        font-weight: 600;
+        line-height: 1.25;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .text-entry-toggle::after {
+        display: inline-block;
+        margin-left: 5px;
+        color: #c7c7c7;
+        font-size: 9px;
+        content: "+";
+        transform: translateY(-1px);
+      }
+
+      .text-entry-toggle[aria-expanded="true"]::after {
+        content: "-";
+      }
+
+      .text-entry-toggle:hover,
+      .text-entry-toggle:focus-visible {
+        color: #777;
+        outline: 0;
       }
 
       .text-entry-title a {
@@ -243,18 +313,20 @@
         color: #777;
       }
 
+      .text-entry-title a[aria-current="page"] + .role-pill {
+        border-color: #cfcfcf;
+        color: #aaa;
+      }
+
       .text-entry-title:hover {
         color: #777;
       }
 
       .text-entry-detail {
+        padding-left: 10px;
         color: #c3c3c3;
         font-weight: 600;
         line-height: 1.25;
-      }
-
-      .text-entry-detail {
-        padding-left: 10px;
       }
 
       .text-entry-detail a {
@@ -262,7 +334,41 @@
         text-decoration: none;
       }
 
+      .text-entry-detail a[aria-current="page"] {
+        color: #777;
+      }
+
       .text-entry-detail:hover {
+        color: #777;
+      }
+
+      .text-entry-children {
+        display: grid;
+        gap: 2px;
+        margin-top: 1px;
+      }
+
+      .text-entry-children[hidden] {
+        display: none;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 2px;
+        margin-top: 13px;
+      }
+
+      .contact-list span,
+      .contact-list a {
+        width: max-content;
+        max-width: 100%;
+        color: #b3b3b3;
+        font-weight: 600;
+        line-height: 1.25;
+        text-decoration: none;
+      }
+
+      .contact-list a:hover {
         color: #777;
       }
 
@@ -275,6 +381,43 @@
         min-height: 0;
         overflow-y: auto;
         padding-right: 12px;
+        scrollbar-gutter: auto;
+        scrollbar-color: #bdbdbd transparent;
+        scrollbar-width: thin;
+      }
+
+      .resume-outline::-webkit-scrollbar,
+      .project-detail-area::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+        background: transparent;
+      }
+
+      .resume-outline::-webkit-scrollbar-track,
+      .resume-outline::-webkit-scrollbar-track-piece,
+      .project-detail-area::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .project-detail-area::-webkit-scrollbar-track-piece {
+        background: transparent;
+      }
+
+      .resume-outline::-webkit-scrollbar-thumb,
+      .project-detail-area::-webkit-scrollbar-thumb {
+        background: #bdbdbd;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .resume-outline::-webkit-scrollbar-thumb:hover,
+      .project-detail-area::-webkit-scrollbar-thumb:hover {
+        background: #969696;
+      }
+
+      .resume-outline::-webkit-scrollbar-corner,
+      .project-detail-area::-webkit-scrollbar-corner {
+        background: transparent;
       }
 
       .project-detail {
@@ -335,6 +478,22 @@
         font-size: 13px;
         font-weight: 600;
         line-height: 1.3;
+      }
+
+      .project-detail-link {
+        width: max-content;
+        color: #9b9b9b;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.25;
+        text-decoration: none;
+        border-bottom: 1px solid #d6d6d6;
+        padding-bottom: 2px;
+      }
+
+      .project-detail-link:hover {
+        color: #777;
+        border-color: #b8b8b8;
       }
 
       .project-detail-content video,
@@ -547,7 +706,8 @@
 
         .audio-dock {
           right: 24px;
-          bottom: 18px;
+          top: 18px;
+          bottom: auto;
           width: calc(100vw - 48px);
         }
       }
@@ -560,13 +720,6 @@
         <div class="site-subtitle">Portfolio of Selected work || June 23, 2026</div>
       </div>
 
-      <nav class="site-nav" aria-label="Social and contact links">
-        <a href="#">Twitter</a>
-        <span aria-hidden="true">|</span>
-        <a href="#">LinkedIn</a>
-        <span aria-hidden="true">|</span>
-        <a href="#">Enquiries</a>
-      </nav>
     </header>
 
     <main aria-label="Selected work">
@@ -593,6 +746,13 @@
               aria-label="Jump to Education"
             >
               Education
+            </a>
+            <a
+              class="outline-jump-link"
+              href="#contact-title"
+              aria-label="Jump to Contact"
+            >
+              Contact
             </a>
           </nav>
 
@@ -704,20 +864,34 @@
             <h2 class="category-title" id="professional-experience-title">Professional Experience</h2>
             <div class="text-list" aria-label="Professional experience entries">
               <div class="text-entry">
-                <span class="text-entry-title">Bully Entertainment (2020-2021)</span>
-                <span class="section-pill">UX Designer</span>
-                <span class="text-entry-detail">
-                  <a href="https://apps.apple.com/us/app/nasas-first-woman/id1574700198">
-                    NASA First Woman
-                  </a>
-                </span>
-                <span class="text-entry-detail">OCVibe</span>
+                <div class="text-entry-heading">
+                  <button
+                    class="text-entry-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="bully-projects"
+                    data-text-entry-toggle
+                  >
+                    Bully Entertainment (2020-2021)
+                  </button>
+                  <span class="role-pill">UX Designer</span>
+                </div>
+                <div class="text-entry-children" id="bully-projects" data-text-entry-children hidden>
+                  <span class="text-entry-detail">
+                    <a href="#nasa-first-woman" data-project-link="nasa-first-woman">
+                      NASA First Woman
+                    </a>
+                  </span>
+                  <span class="text-entry-detail">OCVibe</span>
+                </div>
               </div>
               <div class="text-entry">
-                <span class="text-entry-title">
-                  <a href="#red-6" data-project-link="red-6">Red 6 (2024-2026)</a>
-                </span>
-                <span class="section-pill">Senior UX Engineer</span>
+                <div class="text-entry-heading">
+                  <span class="text-entry-title">
+                    <a href="#red-6" data-project-link="red-6">Red 6 (2024-2026)</a>
+                  </span>
+                  <span class="role-pill">Senior UX Engineer</span>
+                </div>
               </div>
             </div>
           </section>
@@ -727,6 +901,16 @@
             <div class="text-list" aria-label="Education entries">
               <span>Parsons School of Design (2017)</span>
               <span>Flatiron School (2020)</span>
+            </div>
+          </section>
+
+          <section class="outline-section" aria-labelledby="contact-title">
+            <h2 class="category-title" id="contact-title">Contact</h2>
+            <div class="contact-list" aria-label="Contact details">
+              <span>Andy Agus</span>
+              <a href="mailto:Redagus@gmail.com">Redagus@gmail.com</a>
+              <a href="tel:+15616997746">561&bull;699&bull;7746</a>
+              <a href="https://www.linkedin.com/in/andyagus">LinkedIn</a>
             </div>
           </section>
         </aside>
@@ -1241,6 +1425,36 @@
 
           <article
             class="project-detail"
+            id="nasa-first-woman"
+            data-project-detail="nasa-first-woman"
+            data-project-group="professional-experience"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">Professional Experience</p>
+                <h2 class="project-detail-title project-detail-title-row">
+                  NASA First Woman
+                  <span class="role-pill">UX Designer</span>
+                </h2>
+              </div>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/nasa-first-woman.mp4" controls muted autoplay loop playsinline></video>
+              <a
+                class="project-detail-link"
+                href="https://apps.apple.com/us/app/nasas-first-woman/id1574700198"
+                target="_blank"
+                rel="noreferrer"
+              >
+                App Store
+              </a>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
             id="red-6"
             data-project-detail="red-6"
             data-project-group="professional-experience"
@@ -1251,13 +1465,17 @@
                 <p class="project-detail-kicker">Professional Experience</p>
                 <h2 class="project-detail-title project-detail-title-row">
                   Red 6 (2024-2026)
-                  <span class="section-pill">Senior UX Engineer</span>
+                  <span class="role-pill">Senior UX Engineer</span>
                 </h2>
               </div>
             </header>
 
             <div class="project-detail-content">
               <video src="assets/red6.mp4" controls muted autoplay loop playsinline></video>
+              <p class="project-statement">
+                AR For Fighter Pilots<br />
+                Technical Art, and UX Engineering
+              </p>
             </div>
           </article>
 
@@ -1277,6 +1495,7 @@
       const sectionPositions = document.querySelectorAll("[data-section-position]");
       const audioPlayers = document.querySelectorAll("[data-audio-player]");
       const audioDock = document.querySelector("[data-audio-dock]");
+      const textEntryToggles = document.querySelectorAll("[data-text-entry-toggle]");
       const audioPlayerControllers = [];
       let activeProjectId = projectIds[0];
 
@@ -1391,6 +1610,13 @@
         setActiveProject(sectionProjectIds[nextIndex]);
       }
 
+      function setTextEntryOpen(toggle, isOpen) {
+        const children = document.getElementById(toggle.getAttribute("aria-controls"));
+
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        children.hidden = !isOpen;
+      }
+
       function setActiveProject(projectId, updateHash = true) {
         const selectedProjectId = projectIds.includes(projectId) ? projectId : projectIds[0];
         activeProjectId = selectedProjectId;
@@ -1425,6 +1651,12 @@
         updateSectionNavigation(selectedProjectId);
         audioPlayerControllers.forEach((updatePlayerPlacement) => updatePlayerPlacement());
 
+        textEntryToggles.forEach((toggle) => {
+          if (toggle.getAttribute("aria-controls") === "bully-projects" && selectedProjectId === "nasa-first-woman") {
+            setTextEntryOpen(toggle, true);
+          }
+        });
+
         if (updateHash) {
           history.pushState(null, "", `#${selectedProjectId}`);
         }
@@ -1434,6 +1666,14 @@
         link.addEventListener("click", (event) => {
           event.preventDefault();
           setActiveProject(link.dataset.projectLink);
+        });
+      });
+
+      textEntryToggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+          setTextEntryOpen(toggle, !isOpen);
         });
       });
 
