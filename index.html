@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Andy Agus</title>
+    <style>
+      :root {
+        color: #777;
+        background: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.25;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: #fff;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 34px 57px 0;
+      }
+
+      .site-title {
+        margin: 0;
+        color: #6c6c6c;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.12;
+      }
+
+      .site-subtitle {
+        margin-top: 3px;
+        color: #9a9a9a;
+        font-weight: 700;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding-top: 17px;
+        color: #9a9a9a;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .site-nav a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site-nav a:hover {
+        color: #666;
+      }
+
+      .site-nav span {
+        color: #c4c4c4;
+        font-weight: 400;
+      }
+
+      main {
+        min-height: calc(100vh - 72px);
+        padding: 56px 57px;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 57px;
+      }
+
+      .category-title {
+        margin: 0 0 24px;
+        color: #6f6f6f;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .category-stack {
+        display: grid;
+        gap: 46px;
+      }
+
+      .section-stack {
+        display: grid;
+        gap: 34px;
+      }
+
+      .section-title {
+        margin: 0;
+        color: #969696;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .project-list {
+        display: grid;
+        gap: 2px;
+        margin-top: 13px;
+      }
+
+      .project-list h4 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .project-list a {
+        color: #b3b3b3;
+        text-decoration: none;
+      }
+
+      .project-list a:hover {
+        color: #777;
+      }
+
+      .project-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 57px;
+        background: rgba(255, 255, 255, 0.78);
+      }
+
+      .project-overlay[hidden] {
+        display: none;
+      }
+
+      .project-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: min(760px, 100%);
+        height: min(620px, calc(100vh - 114px));
+        min-height: 460px;
+        border: 1px solid #d8d8d8;
+        background: #fff;
+        padding: 18px 20px;
+      }
+
+      .project-panel-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .project-panel-kicker {
+        margin: 0;
+        color: #969696;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .project-panel-title {
+        margin: 24px 0 0;
+        color: #b3b3b3;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .project-content {
+        display: grid;
+        align-content: start;
+        gap: 18px;
+        flex: 1;
+        min-height: 0;
+        margin: 34px 0;
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .project-description {
+        max-width: 520px;
+        margin: 0;
+        color: #8c8c8c;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .project-media {
+        display: grid;
+        gap: 12px;
+      }
+
+      .project-media[hidden],
+      .project-description[hidden] {
+        display: none;
+      }
+
+      .project-media video,
+      .project-media img {
+        display: block;
+        width: 100%;
+        height: 380px;
+        border: 1px solid #e1e1e1;
+        background: #f7f7f7;
+        object-fit: cover;
+      }
+
+      .project-close {
+        border: 0;
+        padding: 0;
+        color: #aaa;
+        background: transparent;
+        font: inherit;
+        font-weight: 700;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .project-close:hover,
+      .project-close:focus-visible {
+        color: #666;
+      }
+
+      .project-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #b8b8b8;
+        font-weight: 700;
+      }
+
+      .project-arrow {
+        border: 0;
+        padding: 0;
+        color: inherit;
+        background: transparent;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .project-arrow:hover,
+      .project-arrow:focus-visible {
+        color: #666;
+      }
+
+      .project-count {
+        color: #c4c4c4;
+      }
+
+      @media (max-width: 640px) {
+        .site-header {
+          flex-direction: column;
+          gap: 18px;
+          padding: 28px 24px 0;
+        }
+
+        .site-nav {
+          padding-top: 0;
+        }
+
+        main {
+          padding: 46px 24px;
+        }
+
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+          gap: 46px;
+        }
+
+        .project-overlay {
+          align-items: center;
+          padding: 24px;
+        }
+
+        .project-panel {
+          height: min(560px, calc(100vh - 48px));
+          min-height: 420px;
+        }
+
+        .project-content {
+          margin: 28px 0;
+        }
+
+        .project-media video,
+        .project-media img {
+          height: 210px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" aria-label="Site header">
+      <div>
+        <h1 class="site-title">Andy Agus</h1>
+        <div class="site-subtitle">Portfolio of Selected work || June 23, 2026</div>
+      </div>
+
+      <nav class="site-nav" aria-label="Social and contact links">
+        <a href="#">Twitter</a>
+        <span aria-hidden="true">|</span>
+        <a href="#">LinkedIn</a>
+        <span aria-hidden="true">|</span>
+        <a href="#">Enquiries</a>
+      </nav>
+    </header>
+
+    <main aria-label="Selected work">
+      <div class="portfolio-grid">
+        <section class="section-stack" aria-labelledby="side-projects-title">
+          <h2 class="category-title" id="side-projects-title">Side Projects</h2>
+          <section aria-labelledby="ar-prototypes-title">
+            <h3 class="section-title" id="ar-prototypes-title">AR Prototypes</h3>
+            <div class="project-list" aria-label="AR Prototype projects">
+              <h4><a href="#museum" data-project="museum">Museum</a></h4>
+              <h4><a href="#bookshelf" data-project="bookshelf">Bookshelf</a></h4>
+              <h4><a href="#saladbar" data-project="saladbar">Saladbar</a></h4>
+            </div>
+          </section>
+
+          <section aria-labelledby="vision-pro-title">
+            <h3 class="section-title" id="vision-pro-title">Computer Interaction</h3>
+          </section>
+        </section>
+
+        <div class="category-stack">
+          <section aria-labelledby="professional-experience-title">
+            <h2 class="category-title" id="professional-experience-title">Professional Experience</h2>
+          </section>
+
+          <section aria-labelledby="education-title">
+            <h2 class="category-title" id="education-title">Education</h2>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div class="project-overlay" data-project-overlay hidden>
+      <article
+        class="project-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-panel-title"
+      >
+        <div class="project-panel-header">
+          <div>
+            <p class="project-panel-kicker">AR Prototypes</p>
+            <h2 class="project-panel-title" id="project-panel-title"></h2>
+          </div>
+          <button class="project-close" type="button" aria-label="Close project" data-project-close>
+            x
+          </button>
+        </div>
+        <div class="project-content">
+          <p class="project-description" data-project-description hidden></p>
+          <div class="project-media" data-project-media hidden></div>
+        </div>
+        <div class="project-controls" aria-label="Project navigation">
+          <button class="project-arrow" type="button" aria-label="Previous project" data-project-prev>
+            &larr;
+          </button>
+          <span class="project-count" data-project-count></span>
+          <button class="project-arrow" type="button" aria-label="Next project" data-project-next>
+            &rarr;
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <script>
+      const projects = {
+        museum: {
+          title: "Museum",
+          description:
+            "Exploring how AR can enhance the museum goers experience, filmed at the Met Museum with the Quest 3",
+          descriptionPlacement: "after-media",
+          media: [
+            {
+              type: "video",
+              src: "assets/museum-ar-1.mp4",
+            },
+          ],
+        },
+        bookshelf: {
+          title: "Bookshelf",
+          description: "Making it easier to explore my bookshelf",
+          descriptionPlacement: "after-media",
+          media: [
+            {
+              type: "video",
+              src: "assets/bookshelf.mp4",
+            },
+          ],
+        },
+        saladbar: {
+          title: "Saladbar",
+          description: "",
+          media: [
+            {
+              type: "video",
+              src: "assets/saladbar.mp4",
+            },
+          ],
+        },
+      };
+
+      const overlay = document.querySelector("[data-project-overlay]");
+      const overlayTitle = document.querySelector("#project-panel-title");
+      const overlayDescription = document.querySelector("[data-project-description]");
+      const overlayMedia = document.querySelector("[data-project-media]");
+      const closeButton = document.querySelector("[data-project-close]");
+      const previousButton = document.querySelector("[data-project-prev]");
+      const nextButton = document.querySelector("[data-project-next]");
+      const projectCount = document.querySelector("[data-project-count]");
+      const projectIds = Object.keys(projects);
+      let activeProjectId = null;
+
+      function renderProjectMedia(mediaItems) {
+        overlayMedia.innerHTML = "";
+        overlayMedia.hidden = mediaItems.length === 0;
+
+        mediaItems.forEach((item) => {
+          if (item.type === "video") {
+            const video = document.createElement("video");
+            video.src = item.src;
+            if (item.poster) {
+              video.poster = item.poster;
+            }
+            video.controls = true;
+            video.playsInline = true;
+            video.muted = true;
+            video.autoplay = true;
+            video.loop = true;
+            overlayMedia.append(video);
+            return;
+          }
+
+          if (item.type === "image") {
+            const image = document.createElement("img");
+            image.src = item.src;
+            image.alt = item.alt;
+            overlayMedia.append(image);
+          }
+        });
+      }
+
+      function openProject(projectId, updateHash = true) {
+        const project = projects[projectId];
+
+        activeProjectId = projectId;
+        overlayTitle.textContent = project.title;
+        overlayDescription.textContent = project.description;
+        overlayDescription.hidden = project.description.length === 0;
+        renderProjectMedia(project.media);
+        overlayDescription.remove();
+
+        if (project.descriptionPlacement === "after-media") {
+          overlayMedia.after(overlayDescription);
+        } else {
+          overlayMedia.before(overlayDescription);
+        }
+        projectCount.textContent = `${projectIds.indexOf(projectId) + 1}/${projectIds.length}`;
+        overlay.hidden = false;
+        closeButton.focus();
+
+        if (updateHash) {
+          history.pushState(null, "", `#${projectId}`);
+        }
+      }
+
+      function showAdjacentProject(direction) {
+        const currentIndex = projectIds.indexOf(activeProjectId);
+        const nextIndex = (currentIndex + direction + projectIds.length) % projectIds.length;
+
+        openProject(projectIds[nextIndex]);
+      }
+
+      function closeProject() {
+        overlay.hidden = true;
+        overlayTitle.textContent = "";
+        overlayDescription.textContent = "";
+        overlayDescription.hidden = true;
+        overlayMedia.innerHTML = "";
+        overlayMedia.hidden = true;
+        projectCount.textContent = "";
+        activeProjectId = null;
+
+        if (location.hash && projects[location.hash.slice(1)]) {
+          history.pushState(null, "", location.pathname);
+        }
+      }
+
+      document.querySelectorAll("[data-project]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          openProject(link.dataset.project);
+        });
+      });
+
+      closeButton.addEventListener("click", closeProject);
+      previousButton.addEventListener("click", () => showAdjacentProject(-1));
+      nextButton.addEventListener("click", () => showAdjacentProject(1));
+      overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) {
+          closeProject();
+        }
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !overlay.hidden) {
+          closeProject();
+        }
+
+        if (event.key === "ArrowLeft" && !overlay.hidden) {
+          showAdjacentProject(-1);
+        }
+
+        if (event.key === "ArrowRight" && !overlay.hidden) {
+          showAdjacentProject(1);
+        }
+      });
+
+      window.addEventListener("popstate", () => {
+        const projectId = location.hash.slice(1);
+
+        if (projects[projectId]) {
+          openProject(projectId, false);
+          return;
+        }
+
+        closeProject();
+      });
+
+      const initialProjectId = location.hash.slice(1);
+
+      if (projects[initialProjectId]) {
+        openProject(initialProjectId, false);
+      }
+    </script>
+  </body>
+</html>
