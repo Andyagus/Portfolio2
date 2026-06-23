@@ -70,32 +70,48 @@
       }
 
       main {
-        min-height: calc(100vh - 72px);
+        height: calc(100vh - 72px);
+        min-height: 420px;
+        overflow: hidden;
         padding: 56px 57px;
       }
 
       .portfolio-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 57px;
+        grid-template-columns: minmax(220px, 280px) minmax(0, 760px);
+        align-items: start;
+        gap: clamp(48px, 9vw, 132px);
+        height: 100%;
+        min-height: 0;
       }
 
       .category-title {
-        margin: 0 0 24px;
+        margin: 0;
         color: #6f6f6f;
         font-size: 13px;
         font-weight: 700;
         line-height: 1.25;
       }
 
-      .category-stack {
+      .resume-outline {
         display: grid;
-        gap: 46px;
+        gap: 0;
+        max-height: 100%;
+        overflow-y: auto;
       }
 
-      .section-stack {
-        display: grid;
-        gap: 34px;
+      .outline-section {
+        border-top: 1px solid #dedede;
+        padding: 13px 0 34px;
+      }
+
+      .outline-section:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .outline-subsection {
+        margin-top: 24px;
       }
 
       .section-title {
@@ -103,6 +119,22 @@
         color: #969696;
         font-size: 13px;
         font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .section-title-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .section-pill {
+        border: 1px solid #d9d9d9;
+        border-radius: 999px;
+        padding: 1px 7px 2px;
+        color: #b8b8b8;
+        font-size: 11px;
+        font-weight: 600;
         line-height: 1.25;
       }
 
@@ -124,45 +156,48 @@
         text-decoration: none;
       }
 
+      .project-list a[aria-current="page"] {
+        color: #777;
+      }
+
       .project-list a:hover {
         color: #777;
       }
 
-      .project-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 57px;
-        background: rgba(255, 255, 255, 0.78);
+      .project-detail-area {
+        display: grid;
+        align-content: start;
+        gap: 24px;
+        min-width: 0;
+        max-height: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        padding-right: 12px;
       }
 
-      .project-overlay[hidden] {
+      .project-detail {
         display: none;
       }
 
-      .project-panel {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: min(760px, 100%);
-        height: min(620px, calc(100vh - 114px));
-        min-height: 460px;
-        border: 1px solid #d8d8d8;
-        background: #fff;
-        padding: 18px 20px;
+      .project-detail.is-active {
+        display: grid;
+        align-content: start;
+        gap: 34px;
       }
 
-      .project-panel-header {
+      .project-detail-header {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 20px;
+        gap: 24px;
       }
 
-      .project-panel-kicker {
+      .project-detail-heading {
+        display: grid;
+        gap: 24px;
+      }
+
+      .project-detail-kicker {
         margin: 0;
         color: #969696;
         font-size: 13px;
@@ -170,26 +205,21 @@
         line-height: 1.25;
       }
 
-      .project-panel-title {
-        margin: 24px 0 0;
+      .project-detail-title {
+        margin: 0;
         color: #b3b3b3;
         font-size: 13px;
         font-weight: 600;
         line-height: 1.25;
       }
 
-      .project-content {
+      .project-detail-content {
         display: grid;
         align-content: start;
         gap: 18px;
-        flex: 1;
-        min-height: 0;
-        margin: 34px 0;
-        overflow-y: auto;
-        padding-right: 8px;
       }
 
-      .project-description {
+      .project-statement {
         max-width: 520px;
         margin: 0;
         color: #8c8c8c;
@@ -198,51 +228,25 @@
         line-height: 1.3;
       }
 
-      .project-media {
-        display: grid;
-        gap: 12px;
-      }
-
-      .project-media[hidden],
-      .project-description[hidden] {
-        display: none;
-      }
-
-      .project-media video,
-      .project-media img {
+      .project-detail-content video,
+      .project-detail-content img {
         display: block;
         width: 100%;
-        height: 380px;
+        aspect-ratio: 16 / 9;
         border: 1px solid #e1e1e1;
         background: #f7f7f7;
-        object-fit: cover;
+        object-fit: contain;
       }
 
-      .project-close {
-        border: 0;
-        padding: 0;
-        color: #aaa;
-        background: transparent;
-        font: inherit;
-        font-weight: 700;
-        line-height: 1;
-        cursor: pointer;
-      }
-
-      .project-close:hover,
-      .project-close:focus-visible {
-        color: #666;
-      }
-
-      .project-controls {
+      .project-section-nav {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 12px;
         color: #b8b8b8;
         font-weight: 700;
       }
 
-      .project-arrow {
+      .project-section-arrow {
         border: 0;
         padding: 0;
         color: inherit;
@@ -251,12 +255,12 @@
         cursor: pointer;
       }
 
-      .project-arrow:hover,
-      .project-arrow:focus-visible {
+      .project-section-arrow:hover,
+      .project-section-arrow:focus-visible {
         color: #666;
       }
 
-      .project-count {
+      .project-section-position {
         color: #c4c4c4;
       }
 
@@ -272,31 +276,27 @@
         }
 
         main {
+          height: auto;
+          min-height: calc(100vh - 72px);
+          overflow: visible;
           padding: 46px 24px;
         }
 
         .portfolio-grid {
           grid-template-columns: 1fr;
-          gap: 46px;
+          gap: 40px;
+          height: auto;
         }
 
-        .project-overlay {
-          align-items: center;
-          padding: 24px;
+        .project-detail.is-active {
+          gap: 28px;
         }
 
-        .project-panel {
-          height: min(560px, calc(100vh - 48px));
-          min-height: 420px;
-        }
-
-        .project-content {
-          margin: 28px 0;
-        }
-
-        .project-media video,
-        .project-media img {
-          height: 210px;
+        .resume-outline,
+        .project-detail-area {
+          max-height: none;
+          overflow: visible;
+          padding-right: 0;
         }
       }
     </style>
@@ -319,235 +319,505 @@
 
     <main aria-label="Selected work">
       <div class="portfolio-grid">
-        <section class="section-stack" aria-labelledby="side-projects-title">
-          <h2 class="category-title" id="side-projects-title">Side Projects</h2>
-          <section aria-labelledby="ar-prototypes-title">
-            <h3 class="section-title" id="ar-prototypes-title">AR Prototypes</h3>
-            <div class="project-list" aria-label="AR Prototype projects">
-              <h4><a href="#museum" data-project="museum">Museum</a></h4>
-              <h4><a href="#bookshelf" data-project="bookshelf">Bookshelf</a></h4>
-              <h4><a href="#saladbar" data-project="saladbar">Saladbar</a></h4>
-            </div>
+        <aside class="resume-outline" aria-label="Portfolio outline">
+          <section class="outline-section" aria-labelledby="side-projects-title">
+            <h2 class="category-title" id="side-projects-title">Side Projects</h2>
+            <section class="outline-subsection" aria-labelledby="ar-prototypes-title">
+              <h3 class="section-title" id="ar-prototypes-title">AR Prototypes</h3>
+              <div class="project-list" aria-label="AR Prototype projects">
+                <h4>
+                  <a href="#museum" data-project-link="museum" aria-current="page">Museum</a>
+                </h4>
+                <h4><a href="#bookshelf" data-project-link="bookshelf">Bookshelf</a></h4>
+                <h4><a href="#saladbar" data-project-link="saladbar">Saladbar</a></h4>
+                <h4>
+                  <a href="#commercial-real-estate-leasing" data-project-link="commercial-real-estate-leasing">
+                    Commercial Real Estate Leasing
+                  </a>
+                </h4>
+              </div>
+            </section>
+
+            <section class="outline-subsection" aria-labelledby="vision-pro-title">
+              <h3 class="section-title" id="vision-pro-title">Computer Interaction</h3>
+              <div class="project-list" aria-label="Computer Interaction prototypes">
+                <h4><a href="#mousedock" data-project-link="mousedock">MouseDock (2026)</a></h4>
+                <h4><a href="#spaces" data-project-link="spaces">Spaces (2026)</a></h4>
+                <h4>
+                  <a href="#mesh-deformation" data-project-link="mesh-deformation">
+                    Mesh Deformation (2026)
+                  </a>
+                </h4>
+              </div>
+            </section>
+
+            <section class="outline-subsection" aria-labelledby="ios-title">
+              <h3 class="section-title section-title-row" id="ios-title">
+                iOS
+                <span class="section-pill">(Exploring-more soon)</span>
+              </h3>
+              <div class="project-list" aria-label="iOS projects">
+                <h4>
+                  <a href="#travel-full-bleed" data-project-link="travel-full-bleed">
+                    Travel Full Bleed (2026)
+                  </a>
+                </h4>
+              </div>
+            </section>
+
+            <section class="outline-subsection" aria-labelledby="vision-title">
+              <h3 class="section-title section-title-row" id="vision-title">
+                Vision
+                <span class="section-pill">(Exploring-more soon)</span>
+              </h3>
+              <div class="project-list" aria-label="Vision projects">
+                <h4>
+                  <a href="#supermarket-vision" data-project-link="supermarket-vision">
+                    Super(market) Vision (2026)
+                  </a>
+                </h4>
+              </div>
+            </section>
           </section>
 
-          <section aria-labelledby="vision-pro-title">
-            <h3 class="section-title" id="vision-pro-title">Computer Interaction</h3>
-          </section>
-        </section>
-
-        <div class="category-stack">
-          <section aria-labelledby="professional-experience-title">
+          <section class="outline-section" aria-labelledby="professional-experience-title">
             <h2 class="category-title" id="professional-experience-title">Professional Experience</h2>
           </section>
 
-          <section aria-labelledby="education-title">
+          <section class="outline-section" aria-labelledby="education-title">
             <h2 class="category-title" id="education-title">Education</h2>
           </section>
-        </div>
+        </aside>
+
+        <section class="project-detail-area" aria-label="Selected project">
+          <article
+            class="project-detail is-active"
+            id="museum"
+            data-project-detail="museum"
+            data-project-group="ar-prototypes"
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">AR Prototypes</p>
+                <h2 class="project-detail-title">Museum</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="AR Prototypes navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/4</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/museum-ar-1.mp4" controls autoplay loop muted playsinline></video>
+              <p class="project-statement">
+                Exploring how AR can enhance the museum goers experience, filmed at the Met Museum
+                with the Quest 3
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="bookshelf"
+            data-project-detail="bookshelf"
+            data-project-group="ar-prototypes"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">AR Prototypes</p>
+                <h2 class="project-detail-title">Bookshelf</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="AR Prototypes navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/4</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/bookshelf.mp4" controls autoplay loop muted playsinline></video>
+              <p class="project-statement">Making it easier to explore my bookshelf</p>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="saladbar"
+            data-project-detail="saladbar"
+            data-project-group="ar-prototypes"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">AR Prototypes</p>
+                <h2 class="project-detail-title">Saladbar</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="AR Prototypes navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/4</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/saladbar.mp4" controls autoplay loop muted playsinline></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="commercial-real-estate-leasing"
+            data-project-detail="commercial-real-estate-leasing"
+            data-project-group="ar-prototypes"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">AR Prototypes</p>
+                <h2 class="project-detail-title">Commercial Real Estate Leasing</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="AR Prototypes navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/4</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video
+                src="assets/real-estate-leasing.mp4"
+                controls
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="mousedock"
+            data-project-detail="mousedock"
+            data-project-group="computer-interaction"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">Computer Interaction</p>
+                <h2 class="project-detail-title">MouseDock (2026)</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="Computer Interaction navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/3</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/mousedock.mp4" controls autoplay loop muted playsinline></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="spaces"
+            data-project-detail="spaces"
+            data-project-group="computer-interaction"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">Computer Interaction</p>
+                <h2 class="project-detail-title">Spaces (2026)</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="Computer Interaction navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/3</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/spaces.mp4" controls autoplay loop muted playsinline></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="mesh-deformation"
+            data-project-detail="mesh-deformation"
+            data-project-group="computer-interaction"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">Computer Interaction</p>
+                <h2 class="project-detail-title">Mesh Deformation (2026)</h2>
+              </div>
+              <nav class="project-section-nav" aria-label="Computer Interaction navigation">
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Previous project in section"
+                  data-section-prev
+                >
+                  &larr;
+                </button>
+                <span class="project-section-position" data-section-position>1/3</span>
+                <button
+                  class="project-section-arrow"
+                  type="button"
+                  aria-label="Next project in section"
+                  data-section-next
+                >
+                  &rarr;
+                </button>
+              </nav>
+            </header>
+
+            <div class="project-detail-content">
+              <video
+                src="assets/mesh-deformation.mp4"
+                controls
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="travel-full-bleed"
+            data-project-detail="travel-full-bleed"
+            data-project-group="ios"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">iOS</p>
+                <h2 class="project-detail-title">Travel Full Bleed (2026)</h2>
+              </div>
+            </header>
+
+            <div class="project-detail-content">
+              <video
+                src="assets/travel-full-bleed.mp4"
+                controls
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+            </div>
+          </article>
+
+          <article
+            class="project-detail"
+            id="supermarket-vision"
+            data-project-detail="supermarket-vision"
+            data-project-group="vision"
+            hidden
+          >
+            <header class="project-detail-header">
+              <div class="project-detail-heading">
+                <p class="project-detail-kicker">Vision</p>
+                <h2 class="project-detail-title">Super(market) Vision (2026)</h2>
+              </div>
+            </header>
+
+            <div class="project-detail-content">
+              <video src="assets/vision.mp4" controls autoplay loop muted playsinline></video>
+            </div>
+          </article>
+
+        </section>
       </div>
     </main>
 
-    <div class="project-overlay" data-project-overlay hidden>
-      <article
-        class="project-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="project-panel-title"
-      >
-        <div class="project-panel-header">
-          <div>
-            <p class="project-panel-kicker">AR Prototypes</p>
-            <h2 class="project-panel-title" id="project-panel-title"></h2>
-          </div>
-          <button class="project-close" type="button" aria-label="Close project" data-project-close>
-            x
-          </button>
-        </div>
-        <div class="project-content">
-          <p class="project-description" data-project-description hidden></p>
-          <div class="project-media" data-project-media hidden></div>
-        </div>
-        <div class="project-controls" aria-label="Project navigation">
-          <button class="project-arrow" type="button" aria-label="Previous project" data-project-prev>
-            &larr;
-          </button>
-          <span class="project-count" data-project-count></span>
-          <button class="project-arrow" type="button" aria-label="Next project" data-project-next>
-            &rarr;
-          </button>
-        </div>
-      </article>
-    </div>
-
     <script>
-      const projects = {
-        museum: {
-          title: "Museum",
-          description:
-            "Exploring how AR can enhance the museum goers experience, filmed at the Met Museum with the Quest 3",
-          descriptionPlacement: "after-media",
-          media: [
-            {
-              type: "video",
-              src: "assets/museum-ar-1.mp4",
-            },
-          ],
-        },
-        bookshelf: {
-          title: "Bookshelf",
-          description: "Making it easier to explore my bookshelf",
-          descriptionPlacement: "after-media",
-          media: [
-            {
-              type: "video",
-              src: "assets/bookshelf.mp4",
-            },
-          ],
-        },
-        saladbar: {
-          title: "Saladbar",
-          description: "",
-          media: [
-            {
-              type: "video",
-              src: "assets/saladbar.mp4",
-            },
-          ],
-        },
-      };
+      const projectLinks = Array.from(document.querySelectorAll("[data-project-link]"));
+      const projectDetails = Array.from(document.querySelectorAll("[data-project-detail]"));
+      const projectIds = projectDetails.map((detail) => detail.dataset.projectDetail);
+      const projectDetailArea = document.querySelector(".project-detail-area");
+      const previousSectionButtons = document.querySelectorAll("[data-section-prev]");
+      const nextSectionButtons = document.querySelectorAll("[data-section-next]");
+      const sectionPositions = document.querySelectorAll("[data-section-position]");
+      let activeProjectId = projectIds[0];
 
-      const overlay = document.querySelector("[data-project-overlay]");
-      const overlayTitle = document.querySelector("#project-panel-title");
-      const overlayDescription = document.querySelector("[data-project-description]");
-      const overlayMedia = document.querySelector("[data-project-media]");
-      const closeButton = document.querySelector("[data-project-close]");
-      const previousButton = document.querySelector("[data-project-prev]");
-      const nextButton = document.querySelector("[data-project-next]");
-      const projectCount = document.querySelector("[data-project-count]");
-      const projectIds = Object.keys(projects);
-      let activeProjectId = null;
+      function getSectionProjectIds(projectId) {
+        const activeDetail = projectDetails.find((detail) => detail.dataset.projectDetail === projectId);
+        const activeGroup = activeDetail.dataset.projectGroup;
 
-      function renderProjectMedia(mediaItems) {
-        overlayMedia.innerHTML = "";
-        overlayMedia.hidden = mediaItems.length === 0;
-
-        mediaItems.forEach((item) => {
-          if (item.type === "video") {
-            const video = document.createElement("video");
-            video.src = item.src;
-            if (item.poster) {
-              video.poster = item.poster;
-            }
-            video.controls = true;
-            video.playsInline = true;
-            video.muted = true;
-            video.autoplay = true;
-            video.loop = true;
-            overlayMedia.append(video);
-            return;
-          }
-
-          if (item.type === "image") {
-            const image = document.createElement("img");
-            image.src = item.src;
-            image.alt = item.alt;
-            overlayMedia.append(image);
-          }
-        });
+        return projectDetails
+          .filter((detail) => detail.dataset.projectGroup === activeGroup)
+          .map((detail) => detail.dataset.projectDetail);
       }
 
-      function openProject(projectId, updateHash = true) {
-        const project = projects[projectId];
+      function updateSectionNavigation(projectId) {
+        const sectionProjectIds = getSectionProjectIds(projectId);
+        const sectionIndex = sectionProjectIds.indexOf(projectId);
 
-        activeProjectId = projectId;
-        overlayTitle.textContent = project.title;
-        overlayDescription.textContent = project.description;
-        overlayDescription.hidden = project.description.length === 0;
-        renderProjectMedia(project.media);
-        overlayDescription.remove();
-
-        if (project.descriptionPlacement === "after-media") {
-          overlayMedia.after(overlayDescription);
-        } else {
-          overlayMedia.before(overlayDescription);
-        }
-        projectCount.textContent = `${projectIds.indexOf(projectId) + 1}/${projectIds.length}`;
-        overlay.hidden = false;
-        closeButton.focus();
-
-        if (updateHash) {
-          history.pushState(null, "", `#${projectId}`);
-        }
+        sectionPositions.forEach((position) => {
+          position.textContent = `${sectionIndex + 1}/${sectionProjectIds.length}`;
+        });
       }
 
       function showAdjacentProject(direction) {
-        const currentIndex = projectIds.indexOf(activeProjectId);
-        const nextIndex = (currentIndex + direction + projectIds.length) % projectIds.length;
+        const sectionProjectIds = getSectionProjectIds(activeProjectId);
+        const currentIndex = sectionProjectIds.indexOf(activeProjectId);
+        const nextIndex = (currentIndex + direction + sectionProjectIds.length) % sectionProjectIds.length;
 
-        openProject(projectIds[nextIndex]);
+        setActiveProject(sectionProjectIds[nextIndex]);
       }
 
-      function closeProject() {
-        overlay.hidden = true;
-        overlayTitle.textContent = "";
-        overlayDescription.textContent = "";
-        overlayDescription.hidden = true;
-        overlayMedia.innerHTML = "";
-        overlayMedia.hidden = true;
-        projectCount.textContent = "";
-        activeProjectId = null;
+      function setActiveProject(projectId, updateHash = true) {
+        const selectedProjectId = projectIds.includes(projectId) ? projectId : projectIds[0];
+        activeProjectId = selectedProjectId;
 
-        if (location.hash && projects[location.hash.slice(1)]) {
-          history.pushState(null, "", location.pathname);
+        projectLinks.forEach((link) => {
+          const isActive = link.dataset.projectLink === selectedProjectId;
+
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+            return;
+          }
+
+          link.removeAttribute("aria-current");
+        });
+
+        projectDetails.forEach((detail) => {
+          const isActive = detail.dataset.projectDetail === selectedProjectId;
+          detail.hidden = !isActive;
+          detail.classList.toggle("is-active", isActive);
+
+          detail.querySelectorAll("video").forEach((video) => {
+            if (isActive) {
+              video.play().catch(() => {});
+              return;
+            }
+
+            video.pause();
+          });
+        });
+
+        projectDetailArea.scrollTop = 0;
+        updateSectionNavigation(selectedProjectId);
+
+        if (updateHash) {
+          history.pushState(null, "", `#${selectedProjectId}`);
         }
       }
 
-      document.querySelectorAll("[data-project]").forEach((link) => {
+      projectLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          openProject(link.dataset.project);
+          setActiveProject(link.dataset.projectLink);
         });
       });
 
-      closeButton.addEventListener("click", closeProject);
-      previousButton.addEventListener("click", () => showAdjacentProject(-1));
-      nextButton.addEventListener("click", () => showAdjacentProject(1));
-      overlay.addEventListener("click", (event) => {
-        if (event.target === overlay) {
-          closeProject();
-        }
+      previousSectionButtons.forEach((button) => {
+        button.addEventListener("click", () => showAdjacentProject(-1));
       });
 
-      window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !overlay.hidden) {
-          closeProject();
-        }
-
-        if (event.key === "ArrowLeft" && !overlay.hidden) {
-          showAdjacentProject(-1);
-        }
-
-        if (event.key === "ArrowRight" && !overlay.hidden) {
-          showAdjacentProject(1);
-        }
+      nextSectionButtons.forEach((button) => {
+        button.addEventListener("click", () => showAdjacentProject(1));
       });
 
       window.addEventListener("popstate", () => {
-        const projectId = location.hash.slice(1);
-
-        if (projects[projectId]) {
-          openProject(projectId, false);
-          return;
-        }
-
-        closeProject();
+        setActiveProject(location.hash.slice(1), false);
       });
 
       const initialProjectId = location.hash.slice(1);
-
-      if (projects[initialProjectId]) {
-        openProject(initialProjectId, false);
-      }
+      setActiveProject(initialProjectId, false);
     </script>
   </body>
 </html>
